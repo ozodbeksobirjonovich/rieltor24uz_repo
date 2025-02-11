@@ -58,9 +58,9 @@ https://t.me/navoiy_ijaragaa_uylar"""
                 forwarded[str(target)] = [msg.message_id]
         except Exception as e:
             logging.error(f"🚫 Xato: E'lon {listing.post_id} ni {target} ga yuborishda: {e}")
-            listing.status = "error"
-            listing.error_details = str(e)
-            listing.save()
+            # listing.status = "error"
+            # listing.error_details = str(e)
+            # listing.save()
         await asyncio.sleep(1)
     if forwarded:
         listing.forwarded_message_ids = json.dumps(forwarded)
