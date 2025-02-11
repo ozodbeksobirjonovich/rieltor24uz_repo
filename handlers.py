@@ -163,7 +163,7 @@ async def start_command(message: types.Message):
             "НАВОИЙ 2 ХОНАЛИ УЙЛАР"
         ]
 
-        group_usernames = ["@navoiy_hovli_kottedj","@navoiy_4_5x_uylar","@navoiy_5x_uylar","@navoiy_4x_uylar","@navoiy_3x_uylar","@navoiy_ijaragaa_uylar","@navoiy_1x_uylar","@navoiy_1_2x_uylar","@navoiy_2_3x_uylar","@navoiy_3_4x_uylar","@navoiy_reklama_uylar","@navoiy_2x_uylar"]
+        group_usernames = ["navoiy_hovli_kottedj","navoiy_4_5x_uylar","navoiy_5x_uylar","navoiy_4x_uylar","navoiy_3x_uylar","navoiy_ijaragaa_uylar","navoiy_1x_uylar","navoiy_1_2x_uylar","navoiy_2_3x_uylar","navoiy_3_4x_uylar","navoiy_reklama_uylar","navoiy_2x_uylar"]
 
         keyboard = InlineKeyboardMarkup()
         for group_id, group_username in zip(source_groups, group_usernames):
