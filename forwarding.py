@@ -3,7 +3,7 @@ import logging
 import json
 import datetime
 from models import HouseListing
-from config import TARGET_GROUPS, SOURCE_GROUPS, FORWARD_INTERVAL, BOOST_EVERY_N
+from config import TARGET_GROUPS, SOURCE_GROUPS, FORWARD_INTERVAL, BOOST_EVERY_N, ADMIN_IDS
 from aiogram import Bot
 from aiogram.types import InputMediaPhoto, InputMediaVideo, InputMediaDocument
 import state
@@ -44,7 +44,8 @@ https://t.me/navoiy_4_5x_uylar
 https://t.me/navoiy_5x_uylar
 https://t.me/navoiy_reklama_uylar
 https://t.me/navoiy_hovli_kottedj
-https://t.me/navoiy_ijaragaa_uylar"""
+https://t.me/navoiy_ijaragaa_uylar
+https://t.me/navoiy_karopka_uylar"""
                         media.parse_mode = "HTML"
                     input_media.append(media)
                 messages = await bot.send_media_group(chat_id=target, media=input_media)
@@ -58,6 +59,7 @@ https://t.me/navoiy_ijaragaa_uylar"""
                 forwarded[str(target)] = [msg.message_id]
         except Exception as e:
             logging.error(f"🚫 Xato: E'lon {listing.post_id} ni {target} ga yuborishda: {e}")
+            await bot.send_message(chat_id=ADMIN_IDS[0], text=f"🚫 Xato: E'lon {listing.post_id} ni {target} ga yuborishda: {e}")
             # listing.status = "error"
             # listing.error_details = str(e)
             # listing.save()
