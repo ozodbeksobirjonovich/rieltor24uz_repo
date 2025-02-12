@@ -10,7 +10,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import asyncio
 
 # E'lon ID larini aniqlash uchun regex
-id_regex = re.compile(r"(?i)\bID[\s:_-]*0*(\d+)\b")
+id_regex = re.compile(r"(?i)\bKV[\s:_-]*0*(\d+)\b")
 
 media_group_cache = {}
 
