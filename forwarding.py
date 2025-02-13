@@ -45,7 +45,7 @@ https://t.me/navoiy_5x_uylar
 https://t.me/navoiy_reklama_uylar
 https://t.me/navoiy_hovli_kottedj
 https://t.me/navoiy_ijaragaa_uylar
-https://t.me/navoiy_karopka_uylar"""
+https://t.me/navoiy_karopka_uylar\n\nhttps://taplink.cc/rieltor24"""
                         media.parse_mode = "HTML"
                     input_media.append(media)
                 messages = await bot.send_media_group(chat_id=target, media=input_media)
