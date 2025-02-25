@@ -89,19 +89,23 @@ async def forwarding_task(bot: Bot):
                     (HouseListing.source_group_id == src) & (HouseListing.status == "active")
                 )))
             listings.sort(key=lambda x: int(x.post_id))
+            
             for listing in listings:
                 if not state.SENDING_ENABLED:
                     break
+                
                 await forward_listing(bot, listing)
                 listing.status = "sent"
                 listing.save()
                 counter += 1
-                # BOOST_EVERY_N ta yangi e'lon yuborilgandan so'ng boost qilingan e'lonlarni qayta yuborish
+                await asyncio.sleep(FORWARD_INTERVAL)  # Har bir e'lon yuborilganidan keyin kutish
+
+                # BOOSTED e'lonlarni yuborish har N tadan keyin
                 if counter % BOOST_EVERY_N == 0:
                     boosted_listings = HouseListing.select().where(HouseListing.boost_status == "boosted")
                     for boosted in boosted_listings:
                         await forward_listing(bot, boosted)
-                await asyncio.sleep(FORWARD_INTERVAL)
+                        await asyncio.sleep(FORWARD_INTERVAL)  # BOOSTED e'lonlarni yuborishda ham kutish qo'shildi
 
             # Agar aktiv post qolmasa, barcha "sent" postlarni qayta "active" qilamiz.
             active_count = HouseListing.select().where(HouseListing.status == "active").count()
@@ -112,6 +116,7 @@ async def forwarding_task(bot: Bot):
                     listing.save()
 
         except Exception as e:
-            logging.error(f"Error processing listings: {e}")
+            logging.error(f"❌ Xatolik: {e}")
             await asyncio.sleep(FORWARD_INTERVAL)
-        await asyncio.sleep(FORWARD_INTERVAL)
+        
+        await asyncio.sleep(FORWARD_INTERVAL)  # Asosiy siklga ham kutish qo'shildi
